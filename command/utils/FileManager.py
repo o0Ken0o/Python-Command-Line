@@ -21,11 +21,23 @@ def gen_seed_data():
 		writer.writerow({"id":7, "name": "Karen Page", "email": "karenpage@gmail.com"})
 		writer.writerow({"id":8, "name": "Luke Cage", "email": "lukecage@gmail.com"})
 
-def read_data():
+def read_data(user_id = None):
 	with open(filename, "r") as csvfile:
 		reader = csv.DictReader(csvfile, fieldnames=fieldnames)
+		user = None
+
+		# skip the header
+		next(reader)
+		
 		for row in reader:
-			print(row)
+			if user_id is not None and int(row.get("id")) == user_id:
+				user = row
+				break
+
+		if user is not None:
+			print(user)
+		else:
+			print("{id} is not valid user id".format(id=user_id))
 
 def send_email(user_id):
 	with open(filename, "r") as csvfile:

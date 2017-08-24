@@ -14,7 +14,7 @@ if args.user_id is None or args.operation is None:
 elif args.operation == 1:
 	gen_seed_data()
 elif args.operation == 2:
-	read_data()
+	read_data(args.user_id)
 elif args.operation == 3:
 	send_email(args.user_id)
 else:

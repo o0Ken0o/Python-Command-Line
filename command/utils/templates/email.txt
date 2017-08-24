@@ -1,0 +1,6 @@
+Hi {name},
+
+We are sending to your {email}.
+Please do not reply this email. It is auto generated.
+
+See you soon.

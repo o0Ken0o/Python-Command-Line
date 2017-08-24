@@ -2,6 +2,7 @@ import os
 import csv
 import shutil
 from tempfile import NamedTemporaryFile
+from .templates import render_context_plain
 
 filename = os.path.join(os.getcwd(), "data.csv")
 fieldnames = ['id', 'name', 'email']
@@ -25,5 +26,17 @@ def read_data():
 		reader = csv.DictReader(csvfile, fieldnames=fieldnames)
 		for row in reader:
 			print(row)
+
+def send_email(user_id):
+	with open(filename, "r") as csvfile:
+		reader = csv.DictReader(csvfile, fieldnames=fieldnames)
+
+		# skip the header
+		next(reader)
+
+		for row in reader:
+			if row.get("id") != None and int(row["id"]) == user_id:
+				print(render_context_plain(row))
+				break
 
 
